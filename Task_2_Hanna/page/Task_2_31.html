@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试2级联动</title>
+    <script src="js/jquery-3.0.0.min.js"></script>
+</head>
+<body>
+<form>
+    <input type="radio" checked="checked" name="student">在校生
+    <input type="radio" name="student">非在校生 <br>
+
+    <input style="display:none" placeholder="您来自哪里？">
+    <div>
+        学校<select id="sel" onchange="change()">
+        <option>北京</option>
+        <option>上海</option>
+        <option>山东</option>
+
+
+    </select>
+        <select id="se">
+            <option>北京大学</option>
+            <option>北京中学</option>
+            <option>北京小学</option>
+
+        </select>
+    </div>
+</form>
+<script>
+    function change() {//方法一
+        $("#se>option").css("display", "none");
+        var shanghai = ["上海大学", "上海中学", "上海小学"];
+        var beijing = ["北京大学", "北京中学", "北京小学"];
+        var shan = ["山东大学", "山东中学", "山东小学"];
+        var obj = document.getElementById('sel');
+        var ob = document.getElementById('se');
+        if (obj.selectedIndex == 0) {
+            ob.options.length = 0
+            for (var i = 0; i < beijing.length; i++) {
+                $("#se").append("<option>" + beijing[i] + "</option>");
+            }
+        }
+        if (obj.selectedIndex == 1) {
+            ob.options.length = 0
+            for (var i = 0; i < shanghai.length; i++) {
+                $("#se").append("<option>" + shanghai[i] + "</option>");
+            }
+        }
+        if (obj.selectedIndex == 2) {
+            ob.options.length = 0
+            for (var i = 0; i < shan.length; i++) {
+                $("#se").append("<option>" + shan[i] + "</option>");
+            }
+        }
+    }
+
+
+    $("input:eq(0)").click(function () {
+        $("input:eq(2)").css("display", "none");
+        $("div").css("display", "inline-block");
+
+
+    });
+    $("input:eq(1)").click(function () {
+        $("input:eq(2)").css("display", "inline-block");
+        $("div").css("display", "none");
+
+    });
+
+
+</script>
+</body>
+</html>
